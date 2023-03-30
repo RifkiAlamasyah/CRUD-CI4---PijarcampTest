@@ -23,7 +23,7 @@
                 <div class="form-group row">
                     <label for="harga" class="col-sm-2 col-form-label">Harga</label>
                     <div class="col-sm-10">
-                        <input type="number" class="form-control" id="harga" name="harga" require>
+                        <input type="number" class="form-control" id="harga" name="harga" data-a-sign="Rp " require>
                     </div>
                 </div>
                 <div class="form-group row">

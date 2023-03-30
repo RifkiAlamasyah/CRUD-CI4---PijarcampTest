@@ -102,7 +102,7 @@ class Home extends BaseController
             $this->produkModel->delete($id);
             session()->setFlashdata('success', 'Data berhasil dihapus.');
         } catch (\Exception $e) {
-            session()->setFlashdata('error', 'Terjadi kesalahan saat menghapus data.');
+            session()->setFlashdata('error', 'Gagal menghapus data.');
         }
         return redirect()->to('/');
     }
@@ -111,11 +111,19 @@ class Home extends BaseController
     {
         try {
             $keyword = $this->request->getVar('keyword');
+            $produk = $this->produkModel->search($keyword);
+    
+            if (empty($produk)) {
+                session()->setFlashdata('error', 'data tidak di temukan.');
+                return redirect()->to('/');
+                
+            }
+    
             $data = [
                 'title' => 'Hasil Pencarian',
-                'produk' => $this->produkModel->search($keyword)
+                'produk' => $produk
             ];
-
+    
             return view('pages/home', $data);
         } catch (\Exception $e) {
             echo $e->getMessage();
